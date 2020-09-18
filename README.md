@@ -37,7 +37,8 @@ Useful commands:-
 ### Connecting to ada
 first use tmux(mutiple sessions and for running longs scripts in bg) and mosh (so that code runs even if few network drops)
 * Make a new tmux session as described above.
-* type mosh username@ada.iiit.ac.in
+* type mosh username@ada.iiit.ac.in <br>
+follow this for more on ada
 Ada help http://hpc.iiit.ac.in/wiki/index.php/Ada_User_Guide 
 
 ### Running codes on ada
