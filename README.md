@@ -18,13 +18,10 @@ Well, probably not very accurate. I haven't actually bothered to look up any of 
 ## Linux basics
 Okay, now I know a lot of you will cringe at this. But hey, I genuinely didn't know some of these before I started my research work. So I'm guessing a lot of you don't either. If you do, feel free to skip through all of this.
 
-### ssh, scp, rsync
-I'm guessing you should already know this. Some examples - 
-- `ssh dheerajreddy.p@ada.iiit.ac.in`
-- `scp -r test_dir/ dheerajreddy.p@ada.iiit.ac.in:~/`
-- `rsync -a --progress -h test.mp4 xyz@preon.iiit.ac.in:~/public_html/m.mp4`
-
-**sidenote** - All of these work on port 22. So if any of these don't work, try allowing the port. On Ubuntu that's done by `sudo ufw allow 22`
+### Connecting to vpn
+* Install .ovpn file on your linux from https://self-help.iiit.ac.in/wiki/index.php/VPN_Connectivity.
+* Now run "sudo ovpn --config <vpnFilename>
+    * replace <vpnFilename> with the  .ovpn file your downloaded fron step 1
 
 ### tmux
 tmux has a lot of use cases, but I've predominantly used them to run lengthy scripts on a remote server when not always in session. You can Google exactly what it is, but roughly it creates a terminal session that will continue to run even after you've logged out of your ssh session, so if you've got a long script to run and don't want to wait while it does, you'll definitely need tmux.
@@ -36,6 +33,40 @@ Useful commands:-
 - `ctrl+B D` - Executing this from inside a tmux session 'detaches' the session, i.e., the session is still running in the background but just that you aren't directly typing/viewing it. By the way, this notation means `ctrl+B` pressed together, followed by pressing just `D`.
 - `ctrl+D` - Executing this inside a tmux session kills the tmux session, and it will take you back to your regular terminal session.
 **sidenote** - PLEASE BE CAREFUL IN RUNNING `ctrl+B D` and `ctrl+D`. A couple of times I've accidentally done `ctrl+D` instead of detaching the session which ended up with me losing out on a lot of data :(((
+
+### Connecting to ada
+first use tmux(mutiple sessions and for running longs scripts in bg) and mosh (so that code runs even if few network drops)
+* Make a new tmux session as described above.
+* type mosh username@ada.iiit.ac.in
+Ada help http://hpc.iiit.ac.in/wiki/index.php/Ada_User_Guide 
+
+### Running codes on ada
+* You land at head-node(home) of ada corresponding to your username.
+Now you need to install Anaconda/mini-conda (for ease) on your headnode 
+* for Anaconda: install .sh file (I did it via site to local and transferred to my home dir on ada)
+* Then "chmod +x name.sh (giving excecute permissions)
+* ./name.sh
+* take a node using sinteractive -c <cpuNum> -g <gpuNum> $USER (or sbatch name of your script if your wanna run a batch job)
+* **free advice** 
+    * setting paths for conda and cuddnn on node is pain(atleast from my experience) 
+    * if your code is in python you can directly run it without doing any module load(though graphics card maybe little lower version than we get by module load cuda/cudnn.
+    * cuda 9 is near deprecation if you find any code in cuda 9 consider switching to cuda 10 
+    
+
+### ssh, scp, rsync
+I'm guessing you should already know this. Some examples - 
+- `ssh dheerajreddy.p@ada.iiit.ac.in`
+- `scp -r test_dir/ dheerajreddy.p@ada.iiit.ac.in:~/`
+- `rsync -a --progress -h test.mp4 xyz@preon.iiit.ac.in:~/public_html/m.mp4`
+
+**sidenote** - All of these work on port 22. So if any of these don't work, try allowing the port. On Ubuntu that's done by `sudo ufw allow 22`
+
+* **transferring data from local machine to ada**
+scp -r ./LOCAL_PATH username@ada.iiit.ac.in:PATH 
+
+* **transferring data from ada to local**
+scp -r username@ada.iiit.ac.in:PATH ./LOCAL_PATH
+
 
 ### cron
 cron is one of my favourite Linux applications. It's used to schedule jobs and it's very easy to pick up. Just enter `crontab -e` and pick the favoured editor of your choice (I prefer vim over nano 😤). Read through the text file that opens up. It has all the instructions commented out with some very nice examples. 
