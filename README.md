@@ -20,8 +20,9 @@ Okay, now I know a lot of you will cringe at this. But hey, I genuinely didn't k
 
 ### Connecting to vpn
 * Install .ovpn file on your linux from https://self-help.iiit.ac.in/wiki/index.php/VPN_Connectivity.
-* Now run "sudo ovpn --config <vpnFilename>
-    * replace <vpnFilename> with the  .ovpn file your downloaded fron step 1
+* Now run
+`sudo ovpn --config <vpnFilename>`
+    * replace `<vpnFilename>` with the  .ovpn file your downloaded fron step 1
 
 ### tmux
 tmux has a lot of use cases, but I've predominantly used them to run lengthy scripts on a remote server when not always in session. You can Google exactly what it is, but roughly it creates a terminal session that will continue to run even after you've logged out of your ssh session, so if you've got a long script to run and don't want to wait while it does, you'll definitely need tmux.
