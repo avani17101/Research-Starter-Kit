@@ -21,7 +21,7 @@ Okay, now I know a lot of you will cringe at this. But hey, I genuinely didn't k
 ### Connecting to vpn
 * Install .ovpn file on your linux from https://self-help.iiit.ac.in/wiki/index.php/VPN_Connectivity.
 * Now run
-`sudo ovpn --config <vpnFilename>`
+`sudo openvpn --config <vpnFilename>`
     * replace `<vpnFilename>` with the  .ovpn file your downloaded fron step 1
 
 ### tmux
